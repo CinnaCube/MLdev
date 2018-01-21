@@ -87,7 +87,46 @@ def standardize(data):
 
     return data_standardized, rangeofdata, minValue
 
-#def
+
+def classify(inX, dataSet, labels, k):
+
+    #Anzahl Zeilen
+    data_rowcount = dataSet.shape[0]
+
+    print(numpy.tile(inX, (data_rowcount, 1)))
+    print(dataSet)
+
+    diffMat = numpy.tile(inX, (data_rowcount, 1)) - dataSet
+
+    print(diffMat)
+    '''
+    sqDiffMat = diffMat ** 2  
+    sqDistances = sqDiffMat.sum(axis=1)  
+    distances = sqDistances ** 0.5  
+    sortedDistIndicies = distances.argsort()  
+
+    classCount = {}
+
+    # print("inX = %s, k = %s" % (inX, k))
+    # print(sortedDistIndicies)
+
+    for i in range(k):  # Eingrenzung auf k-Werte in der sortierten Liste
+        closest = labels[
+            sortedDistIndicies[i]]  # Label (Kategorie [Büro, Wohnung, Haus] entsprechend der Sortierung aufnehmen
+        classCount[closest] = classCount.get(closest, 0) + 1  # Aufbau eines Dictionary über die
+
+    sortedClassCount = sorted(classCount, key=classCount.get,
+                              reverse=True)  # Absteigende Sortierung der gesammelten Labels in k-Reichweite
+    # wobei die Sortierung über den Count (Value) erfolgt
+
+    # print(classCount)
+    # print(sortedClassCount[0])
+    '''
+    return 1
+    #return sortedClassCount[0]  # Liefere das erste Label zurück
+    # also das Label mit der höchsten Anzahl innerhalb der k-Reichweite
 
 dataSet, classLabelVector, classColorVector = fileToDataset("../data/DataSet.txt")
 data_standardized, rangeofdata, minValue = standardize(dataSet)
+data_rowcount = data_standardized.shape[0]
+value = classify(data_standardized[0,:], data_standardized[30:data_rowcount,:], classLabelVector, 5)
